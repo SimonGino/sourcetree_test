@@ -52,23 +52,35 @@ systemctl stop gost.service
 wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.0/gost-linux-amd64-2.11.0.gz && gzip -d gost-linux-amd64-2.11.0.gz && mv gost-linux-amd64-2.11.0 gost && chmod +x gost
 ```
 
+***2.创建gost.json***
 
+```shell
+vi gost.json
+```
 
-***2.***
+***3.***
 
 ```shell
 cd /usr/lib/systemd/system/ && wget -N --no-check-certificate https://github.com/SimonGino/gost/releases/download/1/gost.service
 ```
 
-***3.启动***
+***4.启动***
 
 ```shell
 systemctl start gost.service && systemctl enable gost.service
 ```
 
-***4.停止***
+***停止***
 
 ```shell
 systemctl stop gost.service && systemctl disable gost.service
+```
+
+
+
+**流媒体检测**
+
+```shell
+bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh)
 ```
 
