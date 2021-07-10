@@ -84,3 +84,30 @@ systemctl stop gost.service && systemctl disable gost.service
 bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh)
 ```
 
+**WARP 一键配置脚本**
+
+```shell
+# 自动配置 WARP WireGuard 双栈全局网络
+bash <(curl -fsSL git.io/warp.sh) d
+```
+
+*单栈*
+
+```
+# 自动配置 WARP WireGuard IPv4 网络
+bash <(curl -fsSL git.io/warp.sh) 4
+# 自动配置 WARP WireGuard IPv6 网络
+bash <(curl -fsSL git.io/warp.sh) 6
+```
+
+
+
+```
+#停止WARP
+systemctl stop wg-quick@wgcf
+#重启
+systemctl restart wg-quick@wgcf
+
+
+```
+
