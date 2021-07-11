@@ -119,3 +119,11 @@ systemctl restart wg-quick@wgcf
 wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ```
 
+```shell
+#落地
+apt install iperf3
+iperf3 -s
+#中转
+iperf3 -c IP地址 -R
+```
+
