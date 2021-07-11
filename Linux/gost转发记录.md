@@ -86,8 +86,9 @@ bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionChec
 
 **WARP 一键配置脚本**
 
+ 自动配置 WARP WireGuard 双栈全局网络
+
 ```shell
-# 自动配置 WARP WireGuard 双栈全局网络
 bash <(curl -fsSL git.io/warp.sh) d
 ```
 
@@ -100,14 +101,21 @@ bash <(curl -fsSL git.io/warp.sh) 4
 bash <(curl -fsSL git.io/warp.sh) 6
 ```
 
+停止WARP
 
-
-```
-#停止WARP
+```shell
 systemctl stop wg-quick@wgcf
+```
+
 #重启
+
+```shell
 systemctl restart wg-quick@wgcf
+```
 
+开启BBR一键脚本
 
+```shell
+wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ```
 
