@@ -127,3 +127,9 @@ iperf3 -s
 iperf3 -c IP地址 -R
 ```
 
+```shell
+wget -qO- down.vpsaff.net/linux/speedtest/superbench.sh | sudo bash
+或
+bash <(wget -qO- https://down.vpsaff.net/linux/speedtest/superbench.sh)
+```
+
