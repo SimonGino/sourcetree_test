@@ -1,4 +1,15 @@
-## Xray安装SS命令
+## 安装SS命令
+
+## 一键脚本
+
+#### 通过 wget 命令安装 via wget to install script
+
+```shell
+wget --no-check-certificate https://raw.githubusercontent.com/jinwyp/one_click_script/master/trojan_v2ray_install.sh && chmod +x ./trojan_v2ray_install.sh && ./trojan_v2ray_install.sh
+```
+
+## xray一键安装
+
 ```
 source <(curl -sL https://multi.netlify.app/v2ray.sh) --zh
 ```
