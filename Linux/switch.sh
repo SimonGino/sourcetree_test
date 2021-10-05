@@ -6,8 +6,8 @@ source /etc/profile
 Interface=wg
 Region=sg
 Hostname=
-Telegram_Token=AAGmjiM0TjM5f05DlnScgS6s5M3Buc3rPK4
-Telegram_ChatID=928141567
+Telegram_Token=928141567:AAGmjiM0TjM5f05DlnScgS6s5M3Buc3rPK4
+Telegram_ChatID=1093460198
 Count=0
 URL_Message="https://api.telegram.org/bot$Telegram_Token/sendMessage"
 UA_Browser="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
