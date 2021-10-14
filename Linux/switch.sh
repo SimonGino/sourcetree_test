@@ -17,7 +17,7 @@ function Start {
     echo -e " [Intro] Test System:Ubuntu 20"
     echo -e " [Intro] OpenSource-Project:https://github.com/acacia233/Project-WARP-Unlock"
     echo -e " [Intro] Telegram Channel:https://t.me/cutenicobest"
-    echo -e " [Intro] Version:2021-10-6-1"
+    echo -e " [Intro] Version:2021-10-7-1"
     Test_Netflix_Access
 }
 
@@ -41,12 +41,12 @@ function ChangeIP {
 
 function Judge {
     if [[ $Count == 0 ]];then
-        let sleeptime=$Count*6+10
-        sleep $sleeptime
+        sleep 10
         echo -e " [Info] Still Working,Skipped..."
         Test_Netflix_Access
     else
         PushNotification
+        Test_Netflix_Access
     fi
 }
 
@@ -54,6 +54,7 @@ function PushNotification {
     local Message="New WARP IP for Netflix%0ANode:$Hostname%0AChange Times:$Count"
     echo -e " [Info] Change Times:$Count"
     curl -s -X POST $URL_Message -d chat_id=$Telegram_ChatID -d text="$Message" >/dev/null
+    Count=0
 }
 
 Start
