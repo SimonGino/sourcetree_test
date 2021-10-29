@@ -5,7 +5,7 @@ source /etc/profile
 # Variation
 Interface=wg
 Region=sg
-Hostname=18.138.167.3
+Hostname=
 Telegram_Token=928141567:AAGmjiM0TjM5f05DlnScgS6s5M3Buc3rPK4
 Telegram_ChatID=1093460198
 Count=0
