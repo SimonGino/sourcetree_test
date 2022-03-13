@@ -15,7 +15,7 @@ TrafficStatistics = script-name=TrafficStatistics,update-interval=1
 #奈飞
 nf_check = script-name=nf_check, title="Netflix 解锁检测", content="请刷新", update-interval=1800
 [Script]
-疫情统计 = type=generic, script-path=https://raw.githubusercontent.com/Redeembynight/own/main/Surge/JS/Panel/Covid19/Covid19.js
+疫情统计 = type=generic, script-path=https://raw.githubusercontent.com/SimonGino/sourcetree_test/master/Surge/Covid19.js
 
 节假日提醒 = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/Redeembynight/own/main/Surge/JS/Panel/Timecard/timecard.js
 
