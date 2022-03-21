@@ -9,7 +9,7 @@ echo -e "${Green_font}
 # Project: shbox
 # Version: 0.0.1
 # Blog:    https://vpsxb.net/1642/
-# usage:   bash <(curl -fsSL https://raw.githubusercontent.com/SimonGino/sourcetree_test/master/Linux/ryubox.sh)
+# usage:   bash <(curl -fsSL https://raw.githubusercontent.com/SimonGino/sourcetree_test/master/Linux/box.sh)
 #======================================
 ${Font_suffix}"
 
@@ -23,9 +23,6 @@ first(){
 	apt install git tmux nano vim curl net-tools wget sudo proxychains iperf3 lsof conntrack openssl unzip lsb-release jq ca-certificates python iptables -y && update-ca-certificates
 	bash <(curl -fsSL https://raw.githubusercontent.com/jamespan2012/shbox/main/dependencies/tcping.sh)
 	bash <(curl -fsSL https://raw.githubusercontent.com/jamespan2012/shbox/main/dependencies/bashrc.sh)
-	git clone https://github.com/ToyoDAdoubi/doubi.git
-	git clone https://github.com/hulisang/Port-forwarding.git
-	git clone https://github.com/seal0207/EasyRealM.git
 	bash <(curl -fsSL git.io/speedtest-cli.sh)
 
 }
