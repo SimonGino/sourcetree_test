@@ -2,6 +2,8 @@
 #!desc=通过panel显示及控制
 
 [Panel]
+#流媒体解锁
+#流媒体解锁 = script-name=流媒体解锁, title="流媒体解锁", content="请刷新面板", update-interval=-1
 疫情统计 = script-name=疫情统计, title=新冠疫情查询, content=请刷新, update-interval=1
 节假日提醒 = script-name=节假日提醒,update-interval=1
 #流量统计
@@ -10,13 +12,6 @@
 #网络信息 = script-name=网络信息,title=网络信息,content=请刷新,style=info,update-interval=1
 #奈飞
 #nf_check = script-name=nf_check, title="Netflix 解锁检测", content="请刷新", update-interval=1800
-#流媒体解锁
-#流媒体解锁 = script-name=流媒体解锁, title="流媒体解锁", content="请刷新面板", update-interval=-1
-#Disney+策略组自动控制
-DisneySelect = script-name=DisneySelecter, update-interval=3600
-
-#Netflix策略组自动控制
-NetflixSelect = script-name=NetflixSelect, update-interval=3600
 
 [Script]
 疫情统计 = type=generic, script-path=https://raw.githubusercontent.com/SimonGino/sourcetree_test/master/Surge/Covid19.js
@@ -29,16 +24,4 @@ NetflixSelect = script-name=NetflixSelect, update-interval=3600
 #奈飞
 #nf_check = type=generic, script-path=https://gist.githubusercontent.com/Hyseen/b06e911a41036ebc36acf04ddebe7b9a/raw/nf_check.js?version=1633090677159, argument=fullContent= ➟#REGION_FLAG# #REGION_NAME#&onlyOriginalContent=仅支持自制剧&fullIcon=play.rectangle.on.rectangle.fill&fullIconColor=#70C88E&onlyOriginalIcon=display.trianglebadge.exclamationmark&onlyOriginalIconColor=#F75C03
 #流媒体解锁
-#流媒体解锁 = type=generic, timeout=15, script-path=https://raw.githubusercontent.com/LucaLin233/Luca_Conf/main/Surge/JS/stream-checktool.js
-
-#disney+策略组控制
-#应当修改的字段 disneyGroup Disney+的策略组名称
-#详情请阅读：https://github.com/fishingworld/something/tree/main/DisneySelect
-DisneySelecter = type=generic, script-path=https://raw.githubusercontent.com/fishingworld/something/main/DisneySelect/disney_selecter.js, argument=icon1=checkmark.circle&color1=#55ba94&icon2=cursorarrow.click.badge.clock&color2=#ed6c84&icon3=xmark.shield&color3=#AF52DE&disneyGroup=🎞Streaming
-DisneyChecker = type=cron,cronexp=35 4 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/fishingworld/something/main/DisneySelect/disney_checker.js,script-update-interval=86400,control-api=1
-
-#netflix策略组控制
-#必须更改的字段 netflixGroup 填写你Netflix策略组名称
-#详情请阅读：https://github.com/fishingworld/something/blob/main/NetflixSelect/README.md
-NetflixSelect = type=generic, script-path=https://raw.githubusercontent.com/fishingworld/something/main/NetflixSelect/nf_autoselect.js, argument=icon1=checkmark.circle&color1=#55ba94&icon2=checkmark.circle.trianglebadge.exclamationmark&color2=#9a9ced&icon3=hand.raised.circle&color3=#ea5532&netflixGroup=📺Netflix
-NetflixChecker = type=cron,cronexp=5 4 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/fishingworld/something/main/NetflixSelect/nf_autocheck.js ,script-update-interval=0,control-api=1
+流媒体解锁 = type=generic, timeout=15, script-path=https://raw.githubusercontent.com/LucaLin233/Luca_Conf/main/Surge/JS/stream-checktool.js
