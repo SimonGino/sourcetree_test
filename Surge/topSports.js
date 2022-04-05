@@ -26,7 +26,7 @@ $done($prefs.setValueForKey("S", "31"))
 
 
 const getShoes = {
-    url: "https://m-app-cdn.topsports.com.cn/presale-api/activity/list?brandCode=TS&cityCode=" + $prefs.valueForKey("cityCode") + "&current=1&pageSize=10",
+    url: "https://m-app-cdn.topsports.com.cn/presale-api/activity/list?brandCode=TS&cityCode=" + $prefs.valueForKey("31") + "&current=1&pageSize=10",
     method: "GET"
 };
 
