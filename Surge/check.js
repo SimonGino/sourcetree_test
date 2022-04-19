@@ -39,17 +39,17 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
  let disney_result=""
     if (status==STATUS_COMING) {
         //console.log(1)
-        disney_result="Disney+：即将登陆："+region.toUpperCase()
+        disney_result="Disney+:即将登陆:"+region.toUpperCase()
       } else if (status==STATUS_AVAILABLE){
         //console.log(2)
         console.log(region)
-        disney_result="Disney+：已解锁，区域："+region.toUpperCase()
+        disney_result="Disney+:已解锁,区域:"+region.toUpperCase()
         // console.log(result["Disney"])
       } else if (status==STATUS_NOT_AVAILABLE) {
         //console.log(3)
-        disney_result="Disney+：未支持 🚫 "
+        disney_result="Disney+:未支持 🚫 "
       } else if (status==STATUS_TIMEOUT) {
-        disney_result="Disney+：检测超时 🚦"
+        disney_result="Disney+:检测超时 🚦"
       }
 result.push(disney_result)
 console.log(result)
@@ -102,11 +102,11 @@ panel_result['content'] = content
         if (code === 'Not Available') {
           youtube_check_result += '不支持解锁'
         } else {
-          youtube_check_result += '已解锁，区域：' + code.toUpperCase()
+          youtube_check_result += '已解锁,区域:' + code.toUpperCase()
         }
       })
       .catch((error) => {
-        youtube_check_result += '检测失败，请刷新面板'
+        youtube_check_result += '检测失败,请刷新面板'
       })
   
     return youtube_check_result
@@ -158,7 +158,7 @@ panel_result['content'] = content
         if (code === 'Not Found') {
           return inner_check(80018499)
         }
-        netflix_check_result += '已完整解锁，区域：' + code.toUpperCase()
+        netflix_check_result += '已完整解锁,区域:' + code.toUpperCase()
         return Promise.reject('BreakSignal')
       })
       .then((code) => {
@@ -166,7 +166,7 @@ panel_result['content'] = content
           return Promise.reject('Not Available')
         }
   
-        netflix_check_result += '仅解锁自制剧，区域：' + code.toUpperCase()
+        netflix_check_result += '仅解锁自制剧,区域:' + code.toUpperCase()
         return Promise.reject('BreakSignal')
       })
       .catch((error) => {
@@ -177,7 +177,7 @@ panel_result['content'] = content
           netflix_check_result += '该节点不支持解锁'
           return
         }
-        netflix_check_result += '检测失败，请刷新面板'
+        netflix_check_result += '检测失败,请刷新面板'
       })
   
     return netflix_check_result
