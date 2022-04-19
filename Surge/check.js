@@ -95,7 +95,7 @@ panel_result['content'] = content
       })
     }
   
-    let youtube_check_result = 'YouTube：'
+    let youtube_check_result = 'YouTube:'
   
     await inner_check()
       .then((code) => {
@@ -151,7 +151,7 @@ panel_result['content'] = content
       })
     }
   
-    let netflix_check_result = 'Netflix：'
+    let netflix_check_result = 'Netflix:'
   
     await inner_check(81215567)
       .then((code) => {
