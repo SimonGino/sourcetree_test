@@ -1,6 +1,5 @@
 /* [Panel]
 流媒体解锁 = script-name=流媒体解锁,title=流媒体解锁,content=请刷新面板,update-interval=-1
-配置重载 = title=配置重载,content=配置重载,style=info,script-name=配置重载,update-interval=-1
 
 [Script]
 流媒体解锁 = type=generic,timeout=15,script-path=https://raw.githubusercontent.com/SimonGino/sourcetree_test/master/Surge/check.js,script-update-interval=0 */
