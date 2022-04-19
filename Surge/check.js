@@ -117,7 +117,7 @@ const REQUEST_HEADERS = {
   
         let region = match[1]
         let cnbl = match[2]
-          resolve({ region, cnbl })
+          resolve(region)
       })
     })
     }
