@@ -30,7 +30,7 @@ var flags = new Map([[ "AC" , "🇦🇨" ] ,["AE","🇦🇪"], [ "AF" , "🇦�
   let [{ region, status }] = await Promise.all([testDisneyPlus()])
     await Promise.all([check_netflix(),check_youtube_premium()])
       .then((result) => { 
-         console.log(result)
+        //  console.log(result)
  let disney_result=""
     if (status==STATUS_COMING) {
         //console.log(1)
@@ -47,9 +47,10 @@ var flags = new Map([[ "AC" , "🇦🇨" ] ,["AE","🇦🇪"], [ "AF" , "🇦�
         disney_result="D+🚦"
       }
 result.push(disney_result)
-console.log(result)
-        let content = result.join('')
-        console.log(content)
+// console.log(result)
+        let content = result.join('、')
+        // console.log(content)
+      
      
 panel_result['content'] = content
       })
