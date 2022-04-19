@@ -108,7 +108,7 @@ const REQUEST_HEADERS = {
         // 即将登陆
         if (inSupportedLocation === false || inSupportedLocation === 'false') {
             disney_check_result += '即将登陆' + region
-            
+         
         }
     
         let support = await Promise.race([testPublicGraphqlAPI(accessToken), timeout(options.timeout)])
@@ -118,24 +118,23 @@ const REQUEST_HEADERS = {
         }
         // 支持解锁
         disney_check_result += '已解锁，区域：' + region
-        return disney_check_result
+        return
       } catch (error) {
         console.log(error)
     
         // 不支持解锁
         if (error === 'Not Available') {
             disney_check_result += '不支持解锁'
-         
+          return 
         }
     
         // 检测超时
         if (error === 'Timeout') {
             disney_check_result += '检测超时'
-         
+          return 
         }
     
-        disney_check_result += '检测失败，请刷新面板'
-        return disney_check_result
+        return 
       }
 
       function testPublicGraphqlAPI(accessToken) {
