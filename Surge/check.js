@@ -1,12 +1,20 @@
-let options = getOptions()
-let panel = {
-    title: options.title,
-  }
 const REQUEST_HEADERS = {
     'User-Agent':
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36',
     'Accept-Language': 'en',
 }
+
+// 即将登陆
+const STATUS_COMING = 2
+// 支持解锁
+const STATUS_AVAILABLE = 1
+// 不支持解锁
+const STATUS_NOT_AVAILABLE = 0
+// 检测超时
+const STATUS_TIMEOUT = -1
+// 检测异常
+const STATUS_ERROR = -2
+
   
   ;(async () => {
     let panel_result = {
@@ -16,7 +24,8 @@ const REQUEST_HEADERS = {
       'icon-color': '#FF2D55',
     }
     await Promise.all([check_netflix(), check_disney()])
-      .then((result) => {
+    let [{ region, status }] = await Promise.all([testDisneyPlus(),check_netflix(),check_youtube_premium()])
+      .then((result) => {  
         let content = result.join('\n')
         panel_result['content'] = content
       })
@@ -24,7 +33,56 @@ const REQUEST_HEADERS = {
         $done(panel_result)
       })
   })()
-
+  async function check_youtube_premium() {
+    let inner_check = () => {
+      return new Promise((resolve, reject) => {
+        let option = {
+          url: 'https://www.youtube.com/premium',
+          headers: REQUEST_HEADERS,
+        }
+        $httpClient.get(option, function (error, response, data) {
+          if (error != null || response.status !== 200) {
+            reject('Error')
+            return
+          }
+  
+          if (data.indexOf('Premium is not available in your country') !== -1) {
+            resolve('Not Available')
+            return
+          }
+  
+          let region = ''
+          let re = new RegExp('"countryCode":"(.*?)"', 'gm')
+          let result = re.exec(data)
+          if (result != null && result.length === 2) {
+            region = result[1]
+          } else if (data.indexOf('www.google.cn') !== -1) {
+            region = 'CN'
+          } else {
+            region = 'US'
+          }
+          resolve(region)
+        })
+      })
+    }
+  
+    let youtube_check_result = 'YouTube：'
+  
+    await inner_check()
+      .then((code) => {
+        if (code === 'Not Available') {
+          youtube_check_result += '不支持解锁'
+        } else {
+          youtube_check_result += '已解锁，区域：' + code.toUpperCase()
+        }
+      })
+      .catch((error) => {
+        youtube_check_result += '检测失败，请刷新面板'
+      })
+  
+    return youtube_check_result
+  }
+  
   async function check_netflix() {
     let inner_check = (filmId) => {
       return new Promise((resolve, reject) => {
@@ -96,73 +154,45 @@ const REQUEST_HEADERS = {
     return netflix_check_result
   }
 
-  async function check_disney(){
+  async function testDisneyPlus() {
     try {
-        let { region, cnbl } = await Promise.race([testHomePage(), timeout(options.timeout)])
+        let { region, cnbl } = await Promise.race([testHomePage(), timeout(7000)])
         console.log(`homepage: region=${region}, cnbl=${cnbl}`)
-    
-        let { countryCode, inSupportedLocation, accessToken } = await Promise.race([getLocationInfo(), timeout(options.timeout)])
+        // 即将登陆
+    //  if (cnbl == 2) {
+    //    return { region, status: STATUS_COMING }
+    //  }
+        let { countryCode, inSupportedLocation } = await Promise.race([getLocationInfo(), timeout(7000)])
         console.log(`getLocationInfo: countryCode=${countryCode}, inSupportedLocation=${inSupportedLocation}`)
-        let disney_check_result = 'Disney：'
+        
         region = countryCode ?? region
+        console.log( "region:"+region)
         // 即将登陆
         if (inSupportedLocation === false || inSupportedLocation === 'false') {
-            disney_check_result += '即将登陆' + region
-         
+          return { region, status: STATUS_COMING }
+        } else {
+          // 支持解锁
+          return { region, status: STATUS_AVAILABLE }
         }
-    
-        let support = await Promise.race([testPublicGraphqlAPI(accessToken), timeout(options.timeout)])
-        if (!support) {
-            disney_check_result += '不支持解锁'
         
-        }
-        // 支持解锁
-        disney_check_result += '已解锁，区域：' + region
-        return
       } catch (error) {
-        console.log(error)
-    
+        console.log("error:"+error)
+        
         // 不支持解锁
         if (error === 'Not Available') {
-            disney_check_result += '不支持解锁'
-          return 
+          console.log("不支持")
+          return { status: STATUS_NOT_AVAILABLE }
         }
-    
+        
         // 检测超时
         if (error === 'Timeout') {
-            disney_check_result += '检测超时'
-          return 
+          return { status: STATUS_TIMEOUT }
         }
-    
-        return 
-      }
-
-      function testPublicGraphqlAPI(accessToken) {
-        return new Promise((resolve, reject) => {
-          let opts = {
-            url: 'https://disney.api.edge.bamgrid.com/v1/public/graphql',
-            headers: {
-              'Accept-Language': 'en',
-              Authorization: accessToken,
-              'Content-Type': 'application/json',
-              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36',
-            },
-            body: JSON.stringify({
-              query:
-                'query($preferredLanguages: [String!]!, $version: String) {globalization(version: $version) { uiLanguage(preferredLanguages: $preferredLanguages) }}',
-              variables: { version: '1.5.0', preferredLanguages: ['en'] },
-            }),
-          }
+        
+        return { status: STATUS_ERROR }
+      } 
       
-          $httpClient.post(opts, function (error, response, data) {
-            if (error) {
-              reject('Error')
-              return
-            }
-            resolve(response.status === 200)
-          })
-        })
-      }
+    }
       
       function getLocationInfo() {
         return new Promise((resolve, reject) => {
@@ -267,5 +297,7 @@ const REQUEST_HEADERS = {
           }, delay)
         })
       }
+
     
-  }
+  
+  
