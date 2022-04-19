@@ -23,7 +23,6 @@ const STATUS_ERROR = -2
       icon: 'play.tv.fill',
       'icon-color': '#FF2D55',
     }
-    await Promise.all([check_netflix(), check_disney()])
     let [{ region, status }] = await Promise.all([testDisneyPlus(),check_netflix(),check_youtube_premium()])
       .then((result) => {  
         let content = result.join('\n')
