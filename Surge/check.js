@@ -81,7 +81,7 @@ const STATUS_ERROR = -2
   
     return youtube_check_result
   }
-  
+
   async function check_netflix() {
     let inner_check = (filmId) => {
       return new Promise((resolve, reject) => {
@@ -154,8 +154,10 @@ const STATUS_ERROR = -2
   }
 
   async function testDisneyPlus() {
+    let disney_check_result = 'Disney：'
+
     try {
-        let { region, cnbl } = await Promise.race([testHomePage(), timeout(7000)])
+        disney_check_result = await Promise.race([testHomePage(), timeout(7000)])
         console.log(`homepage: region=${region}, cnbl=${cnbl}`)
         // 即将登陆
     //  if (cnbl == 2) {
@@ -168,10 +170,12 @@ const STATUS_ERROR = -2
         console.log( "region:"+region)
         // 即将登陆
         if (inSupportedLocation === false || inSupportedLocation === 'false') {
-          return { region, status: STATUS_COMING }
+            disney_check_result+='即将登陆'+region.toUpperCase
+            return 
         } else {
           // 支持解锁
-          return { region, status: STATUS_AVAILABLE }
+          disney_check_result+='支持解锁'+region.toUpperCase
+          return 
         }
         
       } catch (error) {
@@ -179,16 +183,18 @@ const STATUS_ERROR = -2
         
         // 不支持解锁
         if (error === 'Not Available') {
+            disney_check_result+='不支持解锁'
           console.log("不支持")
-          return { status: STATUS_NOT_AVAILABLE }
+          return 
         }
         
         // 检测超时
         if (error === 'Timeout') {
-          return { status: STATUS_TIMEOUT }
+            disney_check_result+='检测超时'
+          return
         }
         
-        return { status: STATUS_ERROR }
+        return
       } 
       
     }
