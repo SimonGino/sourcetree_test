@@ -18,7 +18,6 @@ const STATUS_ERROR = -2
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36'
 
 
-  
   ;(async () => {
     let panel_result = {
       title: '流媒体解锁检测',
@@ -26,10 +25,31 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
       icon: 'play.tv.fill',
       'icon-color': '#FF2D55',
     }
-    await Promise.all([testDisneyPlus(),check_netflix(),check_youtube_premium()])
-      .then((result) => {  
+  let [{ region, status }] = await Promise.all([testDisneyPlus()])
+    await Promise.all([check_netflix(),check_youtube_premium()])
+      .then((result) => { 
+         console.log(result)
+ let disney_result=""
+    if (status==STATUS_COMING) {
+        //console.log(1)
+        disney_result="Disney+: 即将登陆"+region.toUpperCase()
+      } else if (status==STATUS_AVAILABLE){
+        //console.log(2)
+        console.log(region)
+        disney_result="Disney+: ✅ 区域:"+region.toUpperCase()
+        // console.log(result["Disney"])
+      } else if (status==STATUS_NOT_AVAILABLE) {
+        //console.log(3)
+        disney_result="Disney+:未支持 🚫 "
+      } else if (status==STATUS_TIMEOUT) {
+        disney_result="Disney+:检测超时 🚦"
+      }
+result.push(disney_result)
+console.log(result)
         let content = result.join('\n')
-        panel_result['content'] = content
+        console.log(content)
+     
+panel_result['content'] = content
       })
       .finally(() => {
         $done(panel_result)
@@ -157,10 +177,8 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
   }
 
   async function testDisneyPlus() {
-    let disney_check_result = 'Disney：'
-
     try {
-        disney_check_result = await Promise.race([testHomePage(), timeout(7000)])
+        let { region, cnbl } = await Promise.race([testHomePage(), timeout(7000)])
         console.log(`homepage: region=${region}, cnbl=${cnbl}`)
         // 即将登陆
     //  if (cnbl == 2) {
@@ -173,12 +191,10 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
         console.log( "region:"+region)
         // 即将登陆
         if (inSupportedLocation === false || inSupportedLocation === 'false') {
-            disney_check_result+='即将登陆'+region.toUpperCase
-            return 
+          return { region, status: STATUS_COMING }
         } else {
           // 支持解锁
-          disney_check_result+='支持解锁'+region.toUpperCase
-          return 
+          return { region, status: STATUS_AVAILABLE }
         }
         
       } catch (error) {
@@ -186,18 +202,16 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
         
         // 不支持解锁
         if (error === 'Not Available') {
-            disney_check_result+='不支持解锁'
           console.log("不支持")
-          return 
+          return { status: STATUS_NOT_AVAILABLE }
         }
         
         // 检测超时
         if (error === 'Timeout') {
-            disney_check_result+='检测超时'
-          return
+          return { status: STATUS_TIMEOUT }
         }
         
-        return
+        return { status: STATUS_ERROR }
       } 
       
     }
@@ -305,7 +319,3 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
           }, delay)
         })
       }
-
-    
-  
-  
