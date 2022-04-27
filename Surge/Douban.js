@@ -28,9 +28,9 @@
 let url = $request.url
 let movieId = url.match(/subject\/(\d+)/)
 let seen = url.match(/\?seen=(\d)$/)
-let collect = false  //收藏功能，默认关闭，需自行配置
+let collect = true  //收藏功能，默认关闭，需自行配置
 let region = "SG" //流媒体区域
-let tmdb_api_key = "" // TMDB API KEY
+let tmdb_api_key = "k_qktj6gmb" // TMDB API KEY
 
 if (!seen) douban_addons()
 if (seen) collect_movie()
