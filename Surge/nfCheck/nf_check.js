@@ -109,7 +109,6 @@ var area = new Map([
             result['style'] = 'good'
             result['content'] = '完整解锁' + region + '区所有剧'
             result['icon'] = 'play.circle'
-            result['icon-color'] = '#00BC12'
             return Promise.reject('BreakSignal')
         })
         .then((code) => {
@@ -121,7 +120,6 @@ var area = new Map([
             result['style'] = 'info'
             result['content'] = '仅支持解锁' + region + '区自制剧'
             result['icon'] = 'pause.circle'
-            result['icon-color'] = '#FFB61E'
             return Promise.reject('BreakSignal')
         })
         .catch((error) => {
@@ -130,7 +128,6 @@ var area = new Map([
                 result['style'] = 'alert'
                 result['content'] = '不支持解锁'
                 result['icon'] = 'stop.circle'
-                result['icon-color'] = '#808080'
                 return
             }
         })
