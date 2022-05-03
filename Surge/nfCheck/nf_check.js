@@ -95,8 +95,6 @@ var area = new Map([
         title: 'Netflix 检测异常',
         style: 'error',
         content: '检测失败，请刷新',
-        icon: 'pause.circle',
-        "icon-color": "#808080",
     }
 
     await test(FILM_ID)
@@ -107,8 +105,7 @@ var area = new Map([
             region = area.get(code.toUpperCase());
             result['title'] = 'Netflix 已解锁'
             result['style'] = 'good'
-            result['content'] = '完整解锁' + region + '区所有剧'
-            result['icon'] = 'play.circle'
+            result['content'] = '已解锁奈飞 ➟ '+ region + code.toUpperCase()
             return Promise.reject('BreakSignal')
         })
         .then((code) => {
@@ -118,16 +115,14 @@ var area = new Map([
             region = area.get(code.toUpperCase());
             result['title'] = 'Netflix 半解锁'
             result['style'] = 'info'
-            result['content'] = '仅支持解锁' + region + '区自制剧'
-            result['icon'] = 'pause.circle'
+            result['content'] = '仅支持自制剧 ➟ ' + region + code.toUpperCase()
             return Promise.reject('BreakSignal')
         })
         .catch((error) => {
             if (error === 'Not Available') {
                 result['title'] = 'Netflix 未解锁'
                 result['style'] = 'alert'
-                result['content'] = '不支持解锁'
-                result['icon'] = 'stop.circle'
+                result['content'] = '该节点未解锁奈飞'
                 return
             }
         })
