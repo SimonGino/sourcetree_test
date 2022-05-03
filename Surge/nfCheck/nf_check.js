@@ -105,7 +105,6 @@ var area = new Map([
             region = area.get(code.toUpperCase());
             result['title'] = 'Netflix 已解锁'
             result['style'] = 'good'
-            已解锁奈飞 ➟ #REGION_NAME# #REGION_CODE#
             result['content'] = '已解锁奈飞 ➟ ' + region + code.toUpperCase()
             result['icon'] = 'play.circle'
             result['icon-color'] = '#00BC12'
