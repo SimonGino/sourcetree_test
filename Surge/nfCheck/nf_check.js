@@ -105,7 +105,7 @@ var area = new Map([
             region = area.get(code.toUpperCase());
             result['title'] = 'Netflix 已解锁'
             result['style'] = 'good'
-            result['content'] = '已解锁奈飞 ➟ ' + region
+            result['content'] = '完整解锁' + region + '区所有剧'
             result['icon'] = 'play.circle'
             result['icon-color'] = '#00BC12'
             return Promise.reject('BreakSignal')
@@ -117,7 +117,7 @@ var area = new Map([
             region = area.get(code.toUpperCase());
             result['title'] = 'Netflix 半解锁'
             result['style'] = 'info'
-            result['content'] = '仅支持自制剧 ➟ ' + region
+            result['content'] = '仅支持解锁' + region + '区自制剧'
             result['icon'] = 'pause.circle'
             result['icon-color'] = #FFB61E'
             return Promise.reject('BreakSignal')
