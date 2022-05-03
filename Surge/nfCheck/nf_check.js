@@ -95,6 +95,8 @@ var area = new Map([
         title: 'Netflix 检测异常',
         style: 'error',
         content: '检测失败，请刷新',
+        icon: "terminal",
+        "icon-color": "#5AC8FA",
     }
 
     await test(FILM_ID)
