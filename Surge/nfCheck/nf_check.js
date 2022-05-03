@@ -119,7 +119,7 @@ var area = new Map([
             result['style'] = 'info'
             result['content'] = '仅支持解锁' + region + '区自制剧'
             result['icon'] = 'pause.circle'
-            result['icon-color'] = #FFB61E'
+            result['icon-color'] = '#FFB61E'
             return Promise.reject('BreakSignal')
         })
         .catch((error) => {
