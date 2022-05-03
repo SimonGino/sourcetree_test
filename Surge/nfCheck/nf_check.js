@@ -127,11 +127,7 @@ var area = new Map([
             }
         })
         .finally(() => {
-            $done({
-                result,
-                icon: "terminal",
-                "icon-color": "#5AC8FA",
-            })
+            $done(result)
         })
 })()
 
