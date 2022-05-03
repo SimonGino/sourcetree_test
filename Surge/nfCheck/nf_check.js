@@ -96,7 +96,7 @@ var area = new Map([
         style: 'error',
         content: '检测失败，请刷新',
         icon: 'pause.circle',
-        icon-color: '#808080',
+        icon-color: "#808080",
     }
 
     await test(FILM_ID)
