@@ -5,7 +5,7 @@
 timecard = script-name=timecard,update-interval=3600
 covid19 = script-name=covid19, title="新冠疫情查询", content="请刷新", update-interval=3600
 # 节点信息
-Netinfo = script-name=Netinfo,title=𝗡𝗘𝗧𝗜𝗡𝗙𝗢,content=请刷新,style=info,update-interval=-1
+Netinfo = script-name=Netinfo,title=NODE INFO,content=请刷新,style=info,update-interval=-1
 # 奈飞油管检测
 stream-checktool = script-name=stream-check,title=𝗦𝗧𝗥𝗘𝗔𝗠 𝗖𝗛𝗘𝗖𝗞,content=请刷新面板,update-interval=-1
 [Script]
