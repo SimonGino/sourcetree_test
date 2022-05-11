@@ -17,4 +17,4 @@ Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(co
 Bili Search = type=http-request,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js,requires-body=0,script-update-interval=0
 Bili漫画签到 = type=cron,cronexp=0 9 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
 [MITM]
-hostname = %%APPEND ios.prod.ftl.netflix.com, ios-*.prod.ftl.netflix.com,*.bilibili.com,ap?.biliapi.net, m.douban.com
+hostname = %APPEND% ios.prod.ftl.netflix.com, ios-*.prod.ftl.netflix.com,*.bilibili.com,ap?.biliapi.net, m.douban.com
