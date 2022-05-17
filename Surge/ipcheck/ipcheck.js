@@ -4,12 +4,12 @@
 * [Panel]
 * 网络信息 = script-name=网络信息, title="网络信息", content="请刷新", style=info, update-interval=-1
 * ...
+* let url = "http://ip-api.com/json/?lang=zh-CN"
 * [Script]
 * 网络信息 = type=generic,timeout=3,script-path=https://raw.githubusercontent.com/SimonGino/sourcetree_test/master/Surge/ipcheck/ipcheck.js
 */
 
-let url = "http://ip-api.com/json/?lang=zh-CN"
-
+let url = "http://api.live.bilibili.com/ip_service/v1/ip_service/get_ip_addr?"
 $httpClient.get(url, function(error, response, data){
     let jsonData = JSON.parse(data)
     let ip = jsonData.query
