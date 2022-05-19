@@ -62,9 +62,9 @@ $httpClient.get(url, function(error, response, data){
     let country = jsonData.country
     let city = jsonData.city
     let isp = jsonData.isp
-    var emoji = flags.get(obj['country'])? flags.get(obj['country']):"🏴‍☠️"
-    emoji=City_ValidCheck(obj['province']) == "香港"? "🇭🇰️":emoji
-    emoji=City_ValidCheck(obj['province']) == "澳门"? "️🇲🇴️":emoji
+    var emoji = flags.get(jsonData['country'])? flags.get(jsonData['country']):"🏴‍☠️"
+    emoji=City_ValidCheck(jsonData['province']) == "香港"? "🇭🇰️":emoji
+    emoji=City_ValidCheck(jsonData['province']) == "澳门"? "️🇲🇴️":emoji
     var title =  emoji +'『'+ City_ValidCheck(jsonData['province'])+'』';//+Area_check(obj['country']);
     var subtitle =  "💋 "+ ISP_ValidCheck(jsonData['isp']) + " ➠ "+ jsonData['country'];
     var description = '服务商:'+jsonData['isp'] + '\n'+'定位: [' +jsonData["latitude"]+","+jsonData["longitude"]+"]"+ '\n' + 'IP:'+ jsonData['addr'] + '\n' +'时区:'+ jsonData['timezone'];
