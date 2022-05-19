@@ -56,7 +56,6 @@ var flags = new Map([  [ "巴基斯坦" , "🇵🇰" ] ,[ "乌克兰" , "🇺�
 
 $httpClient.get(url, function(error, response, data){
     let jsonData = JSON.parse(data)["data"]
-    console.log(jsonData)
     let ip = jsonData['addr']
     let country = jsonData.country
     let city = jsonData.city
@@ -70,7 +69,7 @@ $httpClient.get(url, function(error, response, data){
     
   body = {
     title: "𝗡𝗢𝗗𝗘 𝗜𝗡𝗙𝗢",
-    content: `${title}\n${subtitle}\n${description}`,
+    content: `${title}\n${subtitle}`,
     icon: "bolt.circle",
     'icon-color': "#4169E1"
   }
