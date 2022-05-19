@@ -11,23 +11,24 @@
 
 let url = "http://ip-api.com/json/?lang=zh-CN"
 
+
 $httpClient.get(url, function(error, response, data){
-    let jsonData = JSON.parse(data)
-    let ip = jsonData.query
+    let jsonData = JSON.parse(data)["data"]
+    console.log(jsonData)
+    let ip = jsonData['addr']
     let country = jsonData.country
-    let emoji = getFlagEmoji(jsonData.countryCode)
     let city = jsonData.city
     let isp = jsonData.isp
+
     
   body = {
     title: "𝗡𝗢𝗗𝗘 𝗜𝗡𝗙𝗢",
-    content: `IP: ${ip}\nISP: ${isp}\n位置: ${emoji}${country} ➟ ${city}`,
+    content: `IP: ${ip}\nISP: ${isp}\n位置: ${country} ➟ ${city}`,
     icon: "bolt.circle",
     'icon-color': "#4169E1"
   }
   $done(body);
 });
-
 
 function getFlagEmoji(countryCode) {
     if (countryCode.toUpperCase() == 'TW') {
