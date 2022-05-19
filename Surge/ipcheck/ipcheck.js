@@ -58,6 +58,7 @@ $httpClient.get(url, function(error, response, data){
     let jsonData = JSON.parse(data)["data"]
     console.log(jsonData)
     let ip = jsonData['addr']
+     console.log(ip)
     let country = jsonData.country
     let city = jsonData.city
     let isp = jsonData.isp
