@@ -62,7 +62,7 @@ async function check_youtube_premium() {
       if (code === 'Not Available') {
         youtube_check_result += '油管未解锁'
       } else {
-        youtube_check_result += '油管解锁：' + flags.get(code.toUpperCase())
+        youtube_check_result += '油管解锁：' + code.toUpperCase()+flags.get(code.toUpperCase())
       }
     })
     .catch((error) => {
@@ -118,7 +118,7 @@ async function check_netflix() {
       if (code === 'Not Found') {
         return inner_check(80018499)
       }
-      netflix_check_result += '奈飞解锁：' + flags.get(code.toUpperCase())
+      netflix_check_result += '奈飞解锁：' + code.toUpperCase()+flags.get(code.toUpperCase())
       return Promise.reject('BreakSignal')
     })
     .then((code) => {
@@ -126,7 +126,7 @@ async function check_netflix() {
         return Promise.reject('Not Available')
       }
 
-      netflix_check_result += '奈飞自制 ➟ ' + flags.get(code.toUpperCase())
+      netflix_check_result += '奈飞自制 ➟ ' + code.toUpperCase()+flags.get(code.toUpperCase())
       return Promise.reject('BreakSignal')
     })
     .catch((error) => {
