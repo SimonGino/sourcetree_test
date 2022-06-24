@@ -39,18 +39,14 @@ var flags = new Map([[ "AC" , "🇦🇨" ] ,["AE","🇦🇪"], [ "AF" , "🇦�
         //  console.log(result)
  let disney_result=""
     if (status==STATUS_COMING) {
-        //console.log(1)
-        disney_result="D+❌"+flags.get(region.toUpperCase())
+        disney_result="迪士尼➟"+flags.get(region.toUpperCase())
       } else if (status==STATUS_AVAILABLE){
-        //console.log(2)
         console.log(region)
-        disney_result="D+✅"+flags.get(region.toUpperCase())
-        // console.log(result["Disney"])
+        disney_result="迪士尼➟"+flags.get(region.toUpperCase())
       } else if (status==STATUS_NOT_AVAILABLE) {
-        //console.log(3)
-        disney_result="D+🚫 "
+        disney_result="迪士尼🚫 "
       } else if (status==STATUS_TIMEOUT) {
-        disney_result="D+🚦"
+        disney_result="迪士尼🚦"
       }
 result.push(disney_result)
 // console.log(result)
@@ -97,14 +93,14 @@ panel_result['content'] = content
       })
     }
   
-    let youtube_check_result = 'YT'
+    let youtube_check_result = '油管'
   
     await inner_check()
       .then((code) => {
         if (code === 'Not Available') {
           youtube_check_result += '❌'
         } else {
-          youtube_check_result += '✅'+flags.get(code.toUpperCase())
+          youtube_check_result += '➟'+flags.get(code.toUpperCase())
         }
       })
       .catch((error) => {
@@ -153,14 +149,14 @@ panel_result['content'] = content
       })
     }
   
-    let netflix_check_result = 'NF'
+    let netflix_check_result = '奈飞'
   
     await inner_check(81215567)
       .then((code) => {
         if (code === 'Not Found') {
           return inner_check(80018499)
         }
-        netflix_check_result += '✅'+flags.get(code.toUpperCase())
+        netflix_check_result += '➟'+flags.get(code.toUpperCase())
         return Promise.reject('BreakSignal')
       })
       .then((code) => {
@@ -168,7 +164,7 @@ panel_result['content'] = content
           return Promise.reject('Not Available')
         }
   
-        netflix_check_result += '⚠️'+flags.get(code.toUpperCase())
+        netflix_check_result += '➟ ⚠️'+flags.get(code.toUpperCase())
         return Promise.reject('BreakSignal')
       })
       .catch((error) => {
